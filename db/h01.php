@@ -10,5 +10,5 @@ $ikt = connection(HOST, USER, USERPASS, DBNAME);
 echo '<pre>';
 print_r($ikt);
 
-$slq = 'RENAME TABLE `vikseler_anna.php`.`TABLE 1 TO `vikseler_anna.php`.`koolid2015`';
+$slq = 'RENAME TABLE `vikseler_anna.php`.`TABLE 1` TO `vikseler_anna.php`.`koolid2015`';
 $result = query($slq, $ikt);
