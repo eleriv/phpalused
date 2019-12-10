@@ -1,34 +1,7 @@
 
 <?php
-/**
- * file name: tootajad.php;
- * autor: anna.karutina;
- * date: 05.12.2019;
- */
 $andmeFail = 'tootajad.csv';
-$andmed = array(); // antud massiivi salvestame andmed tootajad,csv failis
-// massiivis hoiame andmed kujul
-/*
-inimesed [
-  [0] => inimene [
-    [0] => nimi,
-    [1] => sugu,
-    [2] => palk
-  ],
-  [1] => inimene [
-    [0] => nimi,
-    [1] => sugu,
-    [2] => palk
-  ],
-  ...
-  [n] => inimene [
-    [0] => nimi,
-    [1] => sugu,
-    [2] => palk
-  ],
-]
-*/
-// kontrollime faili sisu
+$andmed = array();
 echo '<h3>Andmed</h3>';
 echo '<table>';
 echo '
