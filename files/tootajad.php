@@ -43,6 +43,7 @@ function keskminePalk($andmestik, $sugu){
     $keskminePalk = round($palgaSumma / count($andmestik), 2);
     return $keskminePalk;
 }
+
 //suurem palk
 function suuremPalk($andmestik, $sugu){
     $suurem = 0;

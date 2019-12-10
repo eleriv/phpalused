@@ -13,21 +13,21 @@ $loppAeg = $_GET['lopp-aeg'];
 if(strlen($algusAeg) == 0 or strlen($loppAeg) == 0) {
     echo '<a href="soiduaeg-vorm.php">Sisesta kõik andmed!</a>';
 } else {
-    // sisestatud andmete pikkus peab olema 5 sümbolit pikk
+    // sisestatud andmete pikkus peab olema 5 sümbolit
     if(strlen($algusAeg) != 5 or strlen($loppAeg) != 5) {
         echo '<a href="soiduaeg-vorm.php">Sisesta andmed õiges formaadis!</a>';
     } else {
         // arvutame sõiudaeg
         $ajaAndmed = array(); // vormist tulnud andmed võtame ühekaupa
         foreach ($_GET as $aeg){
-            $aeg = explode(':', $aeg); // jagame tundideks ja minutiteks
+            $aeg = explode(':', $aeg); // jagame tundideks/minutiteks
             // vormistame absoluutaeg sekundites
             $aeg = mktime($aeg[0], $aeg[1], 0,date('m', time()),date('d', time()),date('Y', time()));
             $ajaAndmed[] = $aeg; // salvestame massiivi
         }
         // arvutame sekundites vahe sõidu alguse ja lõppu vahel
         $vaheSekundites = $ajaAndmed[1] - $ajaAndmed[0];
-        // leiame tunnid ja minutid
+        // leiame tunnid/minutid
         $soiduTunnid = (int)($vaheSekundites / (60 * 60));
         $soiduMinutid = $vaheSekundites % (60 * 60) / 60;
         // salvestame andmed failisse
@@ -40,7 +40,7 @@ if(strlen($algusAeg) == 0 or strlen($loppAeg) == 0) {
         }
     }
 }
-// kontrollime faili sisu
+// kontrollime faili
 echo '<hr>';
 echo '<h3>Andmed</h3>';
 echo '<table>';
@@ -59,7 +59,7 @@ $jrk = 1;
 while(!feof($sisu)){
     $rida = fgetcsv($sisu, filesize($andmeFail),';');
     echo '<tr>';
-    $arv = count($rida); //rea väljade arv
+    $arv = count($rida); //rea valjade arv
     if($arv == 4) {
         for ($i = 0; $i < $arv; $i++) {
             echo '<td>' . $rida[$i] . '</td>';
