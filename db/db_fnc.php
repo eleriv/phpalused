@@ -20,22 +20,19 @@ function query($sql, $link){
     if($result === false){
         echo 'Probleem päringuga <b>'.$sql.'</b><br>';
     }
-    // kui $result === true
+    //kui $result on true
     return $result;
 }
-
-// SELECT, SHOW, DESCRIBE or EXPLAIN sql jaoks
 function getData($sql, $link){
-    $result = query($sql, $link); // saadame päring meie funktsiooni abil
-    $data = array(); // siin salvestame päringu andmed
-    // nii kaua, kui andmed on, loeme need
+    $result = query($sql, $link);
+    $data = array();
+    // while- loeb kõik andmed ükshaaval
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-        $data[] = $row; // ja salvestame meie massiivi
+        $data[] = $row;
     }
-    // kui massiiv on tühi - andmete lugemise probleem
     if(count($data) == 0){
         return false;
     }
-    // muidu tagastame loetud andmed
     return $data;
 }
+
