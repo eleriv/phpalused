@@ -1,4 +1,10 @@
-
+<style>
+    table, tr, th, td {
+        border: 1px solid #333;
+        border-collapse: collapse;
+        text-align: center;
+    }
+</style>
 <?php
 $andmeFail = 'tootajad.csv';
 $andmed = array();
@@ -68,3 +74,5 @@ echo 'Naiste suurem palk = '.suuremPalk($andmed, 'n').'&euro;<br>';
 if(keskminePalk($andmed, 'm') != keskminePalk($andmed, 'n')) {
     echo 'Järeldus statistikast: andtud kontoris esineb diskrimineerimist soo järgi';
 }
+
+

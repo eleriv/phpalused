@@ -6,7 +6,7 @@ require_once 'db_fnc.php';
 // lisan väljundi kasutamise faili
 require_once 'valjund.php';
 
-$ikt = connect(HOST, USER, PASS, DBNAME);
+$ikt = connect(HOST, USER, USERPASS, DBNAME);
 // katsetame sql
 $sql = 'SELECT Kool,Kokku FROM koolid2015';
 $result = getData($sql, $ikt);

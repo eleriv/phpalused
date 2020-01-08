@@ -3,7 +3,7 @@ require_once 'config.php';
 require_once 'db_fnc.php';
 require_once 'valjund.php';
 
-$ikt = connect(HOST, USER, PASS, DBNAME);
+$ikt = connect(HOST, USER, USERPASS, DBNAME);
 
 otsinguVorm();
 if(isset($_GET['otsi'])){

@@ -5,35 +5,34 @@ table, tr, th, td {
     text-align: center;
   }
 </style>
+
 <?php
 $andmeFail = 'soiduaeg.csv';
+
 $algusAeg = $_GET['algus-aeg'];
 $loppAeg = $_GET['lopp-aeg'];
-// tühja välja kontroll
+
 if(strlen($algusAeg) == 0 or strlen($loppAeg) == 0) {
     echo '<a href="soiduaeg-vorm.php">Sisesta kõik andmed!</a>';
 } else {
-    // sisestatud andmete pikkus peab olema 5 sümbolit
     if(strlen($algusAeg) != 5 or strlen($loppAeg) != 5) {
         echo '<a href="soiduaeg-vorm.php">Sisesta andmed õiges formaadis!</a>';
     } else {
-        // arvutame sõiudaeg
-        $ajaAndmed = array(); // vormist tulnud andmed võtame ühekaupa
+        // arvutame sõiduaja
+        $ajaAndmed = array();
         foreach ($_GET as $aeg){
-            $aeg = explode(':', $aeg); // jagame tundideks/minutiteks
-            // vormistame absoluutaeg sekundites
+            $aeg = explode(':', $aeg);
+
             $aeg = mktime($aeg[0], $aeg[1], 0,date('m', time()),date('d', time()),date('Y', time()));
-            $ajaAndmed[] = $aeg; // salvestame massiivi
+            $ajaAndmed[] = $aeg;
         }
-        // arvutame sekundites vahe sõidu alguse ja lõppu vahel
+
         $vaheSekundites = $ajaAndmed[1] - $ajaAndmed[0];
-        // leiame tunnid/minutid
         $soiduTunnid = (int)($vaheSekundites / (60 * 60));
         $soiduMinutid = $vaheSekundites % (60 * 60) / 60;
-        // salvestame andmed failisse
-        $ridaFailisse = $algusAeg.";".$loppAeg.";".$soiduTunnid.";".$soiduMinutid."\n"; // loome rida CSV formaadis
-        $kasSalvestatud = file_put_contents($andmeFail, $ridaFailisse, FILE_APPEND | LOCK_EX); // paneme rida failisse kirja
-        // kui salvestamine õnnestus - väljastame vastav teade
+
+        $ridaFailisse = $algusAeg.";".$loppAeg.";".$soiduTunnid.";".$soiduMinutid."\n";
+        $kasSalvestatud = file_put_contents($andmeFail, $ridaFailisse, FILE_APPEND | LOCK_EX);
         if($kasSalvestatud !== false){
             echo '<h4>Sinu andmed on salvestatud!</h4>';
             echo '<a href="soiduaeg-vorm.php">Sisesta uued andmed</a>';
@@ -59,7 +58,7 @@ $jrk = 1;
 while(!feof($sisu)){
     $rida = fgetcsv($sisu, filesize($andmeFail),';');
     echo '<tr>';
-    $arv = count($rida); //rea valjade arv
+    $arv = count($rida);
     if($arv == 4) {
         for ($i = 0; $i < $arv; $i++) {
             echo '<td>' . $rida[$i] . '</td>';
@@ -67,6 +66,8 @@ while(!feof($sisu)){
         echo '</tr>';
     }
 }
+
 fclose($sisu);
 echo '<tbody>';
 echo '</table>';
+
